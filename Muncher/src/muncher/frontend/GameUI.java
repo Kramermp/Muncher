@@ -38,4 +38,8 @@ public class GameUI extends JFrame {
     public void movePlayer(int playerX, int playerY) {
         game.movePlayer(playerX, playerY);
     }
+    
+    public NumberPanel getCurrentSpace() {
+        return game.getCurrentSpace();
+    }
 }

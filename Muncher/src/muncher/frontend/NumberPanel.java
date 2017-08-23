@@ -16,9 +16,10 @@ import javax.swing.JPanel;
  */
 public class NumberPanel extends JPanel {
     private int number;
-    private static Color backgroundColor = Color.GRAY;
-    private static Color errorColor = Color.RED;
-    private static Color correctColor = Color.GREEN;
+    private boolean hasBeenChecked = false;
+    private Color backgroundColor = Color.GRAY;
+    public final static Color errorColor = Color.RED;
+    public final static Color correctColor = Color.GREEN;
     
     public NumberPanel(int number) {
         this.number = number;
@@ -27,7 +28,31 @@ public class NumberPanel extends JPanel {
 
     private void configurePanel() {
         Random rng = new Random();
-        this.setBackground(new Color(rng.nextInt(255), rng.nextInt(255), rng.nextInt(255)));
+        this.setBackground(backgroundColor);
         this.add(new JLabel(Integer.toString(this.number)));
+    }
+    
+    public int getNumber () {
+        return this.number;
+    }
+    
+    public void setSelected(boolean isSelected) {
+        if(isSelected) {
+            setBackground(Color.BLUE);
+        } else {
+            setBackground(backgroundColor);
+        }
+    }
+    
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+    
+    public void setHasBeenChecked(boolean hasBeenChecked) {
+        this.hasBeenChecked = hasBeenChecked;
+    }
+    
+    public boolean getHasBeenChecked() {
+        return this.hasBeenChecked;
     }
 }

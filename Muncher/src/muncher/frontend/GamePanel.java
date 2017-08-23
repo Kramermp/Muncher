@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 import javax.swing.JPanel;
 import muncher.backend.GameListener;
 
@@ -37,7 +38,7 @@ public class GamePanel extends JPanel {
         
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < 7; j++) {
-                NumberPanel currentPanel = new NumberPanel(5);
+                NumberPanel currentPanel = new NumberPanel(new Random().nextInt(9) + 1);
                 gameBoard[i][j] = currentPanel;
                 c.gridy = i;
                 c.gridx = j;
@@ -48,10 +49,14 @@ public class GamePanel extends JPanel {
     }
     
     public void movePlayer(int newPlayerX, int newPlayerY) {
-        gameBoard[currentPlayerY][currentPlayerX].setBackground(backgroundColor);
-        gameBoard[newPlayerY][newPlayerX].setBackground(selectedColor);
+        gameBoard[currentPlayerY][currentPlayerX].setSelected(false);
+        gameBoard[newPlayerY][newPlayerX].setSelected(true);
         currentPlayerX = newPlayerX;
         currentPlayerY = newPlayerY;
+    }
+    
+    public NumberPanel getCurrentSpace() {
+        return gameBoard[currentPlayerY][currentPlayerX];
     }
     
 
