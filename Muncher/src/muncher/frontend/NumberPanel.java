@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
  */
 public class NumberPanel extends JPanel {
     private int number;
+    private JTextField label;
     private boolean hasBeenChecked = false;
     private Color backgroundColor = Color.GRAY;
     public final static Color errorColor = Color.RED;
@@ -23,13 +25,17 @@ public class NumberPanel extends JPanel {
     
     public NumberPanel(int number) {
         this.number = number;
+        this.label = new JTextField(3);
+        this.label.setHorizontalAlignment(JTextField.CENTER);
+        this.label.setEditable(false);
+        this.label.setText(Integer.toString(this.number));
         configurePanel();
     }
 
     private void configurePanel() {
         Random rng = new Random();
         this.setBackground(backgroundColor);
-        this.add(new JLabel(Integer.toString(this.number)));
+        this.add(this.label);
     }
     
     public int getNumber () {
