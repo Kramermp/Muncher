@@ -15,14 +15,18 @@ import muncher.frontend.NumberPanel;
  * @author mpk5206
  */
 public class GameController {
+    double playerScore;
+    double difficulty = 1;
     int playerX = 0;
     int playerY = 0;
-    int userLives = 5;
+    int userLives = 10;
+    int targetNumber;
     GameUI gameUI;
     
     public GameController () {
         this.gameUI = new GameUI(this);
         this.gameUI.requestFocusInWindow();
+        this.targetNumber = this.gameUI.getTargetNumber();
     }
     
     public void keyPressed(KeyEvent ke) {
@@ -101,10 +105,11 @@ public class GameController {
             currentSpace.setHasBeenChecked(true);
             int number = currentSpace.getNumber();
             //Needs to be able to validate for different Numbers
-            if(number % 7 == 0) {
+            if(answerIsCorrect(currentSpace)) {
                 //Answer is correct
                 currentSpace.setBackground(Color.GREEN); //We change the current color to green
                 currentSpace.setBackgroundColor(Color.GREEN); //Will ensure it returns to green
+                playerScore = playerScore + Math.floor((100) * difficulty);
             } else {
                 //Answer is wrong
                 currentSpace.setBackground(Color.RED); //Will set current color to red
@@ -118,11 +123,29 @@ public class GameController {
             //Possible TODO: Maybe alert the user of this fact
         }
     }
+    private boolean answerIsCorrect(NumberPanel currentSpace) {
+        if(isPrimeGame()) {
+            //Is a game based off of prime number
+            if(GameRule.isPrime(currentSpace.getNumber())) {
+                return true;
+            }
+        } else {
+            //Is a game based off of multiples
+            if(currentSpace.getNumber() % targetNumber == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
     
+    private boolean isPrimeGame() {
+        return gameUI.isPrimeGame();
+    }
     private void checkIfFinished() {
         if(userLives <= 0) {
             //User ran out of lives and has lost the game
             gameUI.dispose();
         }
     }
+    
 }

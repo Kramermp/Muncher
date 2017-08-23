@@ -13,6 +13,7 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 import javax.swing.JPanel;
 import muncher.backend.GameListener;
+import muncher.backend.GameRule;
 
 /**
  *
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel {
     Color selectedColor = Color.BLUE;
     int currentPlayerX;
     int currentPlayerY;
+    GameRule gameRule = new GameRule();
     
     public GamePanel() {
         this.setFocusable(true);
@@ -38,7 +40,7 @@ public class GamePanel extends JPanel {
         
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < 7; j++) {
-                NumberPanel currentPanel = new NumberPanel(new Random().nextInt(9) + 1);
+                NumberPanel currentPanel = new NumberPanel(gameRule.get(i , j));
                 gameBoard[i][j] = currentPanel;
                 c.gridy = i;
                 c.gridx = j;
@@ -57,6 +59,18 @@ public class GamePanel extends JPanel {
     
     public NumberPanel getCurrentSpace() {
         return gameBoard[currentPlayerY][currentPlayerX];
+    }
+    
+    public int getTargetNumber() {
+        return gameRule.getTargetNumber();
+    }
+    
+    public boolean isPrimeGame() {
+        return gameRule.isPrimeGame();
+    }
+    
+    public String getRuleString() {
+        return gameRule.getRuleString();
     }
     
 

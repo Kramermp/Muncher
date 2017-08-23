@@ -5,10 +5,13 @@
  */
 package muncher.frontend;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import muncher.backend.GameController;
 import muncher.backend.GameListener;
+import muncher.backend.GameRule;
 
 /**
  *
@@ -31,7 +34,9 @@ public class GameUI extends JFrame {
     }
     
     private void addComponents () {
-        this.add(game);
+        this.setLayout(new BorderLayout());
+        this.add(new JLabel(game.getRuleString()), BorderLayout.NORTH);
+        this.add(game, BorderLayout.CENTER);
         this.addKeyListener(new GameListener(this.parentController));
     }
     
@@ -41,5 +46,13 @@ public class GameUI extends JFrame {
     
     public NumberPanel getCurrentSpace() {
         return game.getCurrentSpace();
+    }
+    
+    public int getTargetNumber() {
+        return game.getTargetNumber();
+    }
+    
+    public boolean isPrimeGame() {
+        return game.isPrimeGame();
     }
 }
