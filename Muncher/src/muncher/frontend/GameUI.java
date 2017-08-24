@@ -55,4 +55,8 @@ public class GameUI extends JFrame {
     public boolean isPrimeGame() {
         return game.isPrimeGame();
     }
+    
+    public int getAnswerCount () {
+        return game.getAnswerCount();
+    }
 }

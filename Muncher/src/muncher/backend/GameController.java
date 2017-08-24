@@ -21,11 +21,14 @@ public class GameController {
     int playerY = 0;
     int userLives = 10;
     int targetNumber;
+    int correctAnswerCount = 0;
+    int correctResponseCount = 0;
     GameUI gameUI;
     
     public GameController () {
         this.gameUI = new GameUI(this);
         this.gameUI.requestFocusInWindow();
+        this.correctAnswerCount = this.gameUI.getAnswerCount();
         this.targetNumber = this.gameUI.getTargetNumber();
     }
     
@@ -110,6 +113,7 @@ public class GameController {
                 currentSpace.setBackground(Color.GREEN); //We change the current color to green
                 currentSpace.setBackgroundColor(Color.GREEN); //Will ensure it returns to green
                 playerScore = playerScore + Math.floor((100) * difficulty);
+                correctResponseCount++;
             } else {
                 //Answer is wrong
                 currentSpace.setBackground(Color.RED); //Will set current color to red
@@ -145,6 +149,10 @@ public class GameController {
         if(userLives <= 0) {
             //User ran out of lives and has lost the game
             gameUI.dispose();
+        } else {
+            if(correctResponseCount >= correctAnswerCount) {
+                    System.out.println("Player has won.");
+                }
         }
     }
     

@@ -73,5 +73,9 @@ public class GamePanel extends JPanel {
         return gameRule.getRuleString();
     }
     
+    public int getAnswerCount() {
+        return gameRule.getAnswerCount();
+    }
+    
 
 }

@@ -97,5 +97,9 @@ public class GameRule {
     public String getRuleString() {
         return this.ruleText;
     }
+    
+    public int getAnswerCount() {
+        return correctAnswerCount;
+    }
            
 }
